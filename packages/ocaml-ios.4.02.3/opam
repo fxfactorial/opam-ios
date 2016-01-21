@@ -1,5 +1,0 @@
-opam-version: "1"
-maintainer: "edgar@beancode.io"
-depends: [
-  "ocaml-ios" {= "4.02.3"}
-]
