@@ -1,0 +1,16 @@
+opam-version: "1.2"
+maintainer: "whitequark@whitequark.org"
+homepage: "http://erratique.ch/software/react"
+authors: ["Daniel Bünzli <daniel.buenzl i@erratique.ch>"]
+doc: "http://erratique.ch/software/react/doc/React"
+dev-repo: "http://erratique.ch/repos/react.git"
+bug-reports: "https://github.com/dbuenzli/react/issues"
+tags: [ "reactive" "declarative" "signal" "event" "frp" "org:erratique" ]
+license: "BSD3"
+depends: ["ocaml-android"]
+build: [
+  ["ocaml" "pkg/git.ml"]
+  ["env" "OCAMLFIND_TOOLCHAIN=android" "ocaml" "pkg/build.ml" "native=%{ocaml-native}%" "native-dynlink=%{ocaml-native-dynlink}%"]
+]
+install: [["opam-installer" "--prefix=%{prefix}%/linux-androideabi" "react.install"]]
+remove: [["ocamlfind" "-toolchain" "android" "remove" "react"]]
