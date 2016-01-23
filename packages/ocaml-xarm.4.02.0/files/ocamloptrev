@@ -4,8 +4,6 @@
 #
 USAGE='ocamloptrev  -rev M.N  other-ocamlopt-options ...'
 
-OCAMLDIR=/usr/local/ocamlxarm/v7
-
 REV=''
 declare -a ARGS
 while [ $# -gt 0 ] ; do
@@ -32,5 +30,5 @@ fi
 HIDEOUT=/Applications/Xcode.app/Contents/Developer 
 PLT=$HIDEOUT/Platforms/iPhoneOS.platform 
 SDK=/Developer/SDKs/iPhoneOS${REV}.sdk 
-OCAMLC=$OCAMLDIR/bin/ocamlopt
+OCAMLC=OCAMLDIR/bin/ocamlopt
 $OCAMLC -ccopt -isysroot -ccopt "$PLT$SDK" "${ARGS[@]}"
