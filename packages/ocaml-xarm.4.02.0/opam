@@ -4,4 +4,4 @@ build:[
   ["./install.sh" "%{prefix}%"]
 ]
 
-available: [ ocaml-version = "4.02.0"]
+available: [ ocaml-version = "4.02.0" & os = "darwin"]

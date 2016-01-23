@@ -1,0 +1,82 @@
+#+AUTHOR:   Edgar Aroutiounian
+#+EMAIL:    edgar.factorial@gmail.com
+#+LANGUAGE: en
+#+STARTUP: indent
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+OPTIONS:  toc:nil num:0
+
+* opam-ios
+
+This repository contains a compiler for OCaml on iOS.
+
+* Usage
+First create a fresh switch, it must be 4.02.0:
+
+*NOTE* This is important, installation of ~ocaml-xarm~ is a
+ destructive operation.
+
+#+BEGIN_SRC shell
+$ opam switch -A ios 4.02.0
+#+END_SRC
+
+Then add this repository with:
+
+#+BEGIN_SRC shell
+$ opam repository add ios git://github.com/fxfactorial/opam-ios
+#+END_SRC
+
+Now do:
+
+*NOTE* This is a destructive install, hence I told you to make a
+separate switch for this install.
+
+#+BEGIN_SRC shell
+$ opam install ocaml-xarm
+#+END_SRC
+
+Now you can compile OCaml that will run on the iPhone!
+
+* Example
+
+Here is a stupid server, mostly useful to show how one can use the
+Unix module with no problem on the iPhone.
+
+#+BEGIN_SRC ocaml -n
+open UnixLabels
+
+let () =
+  let sock = socket ~domain:PF_INET ~kind:SOCK_STREAM ~protocol:0 in
+  bind sock ~addr:(ADDR_INET (inet_addr_any, 3000));
+  print_endline "About to listen";
+  listen sock 5;
+  let resp = "Thanks for the Test!\n" in
+  while true do
+    let (listen_sock, listen_addr) = accept sock in
+    let buf = String.create 255 in
+    (ignore (read listen_sock ~buf ~pos:0 ~len:255));
+    print_endline buf;
+    (ignore @@ write listen_sock ~buf:resp ~pos:0 ~len:(String.length resp - 1));
+    Unix.close listen_sock
+  done
+#+END_SRC
+
+Compile with:
+
+#+BEGIN_SRC shell
+$ ocamloptrev -rev 8.3 unix.cmxa server.ml -o The_server
+#+END_SRC
+
+The -rev 8.3 refers to the iOS SDK. In this example I compiled for
+8.3, note that this is just for paths, it will actually look for a
+path like /Applications/Xcode.app... Funny enough, even though this
+was for 8.3, the code will work below that as well, I tested it on 8.3
+and iOS 7.1.
+
+And here's an example of it working:
+
+[[./working_server.gif]]
+
+* Acknowledgments
+The real heroes are Gerd Stolpmann, awesome guys at
+Psellos.com; special shout out to Jeffrey Scofield.
