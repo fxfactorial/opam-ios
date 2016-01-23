@@ -1,6 +1,7 @@
-#!/bin/sh 
+#!/bin/sh -e
 
 PREFIX="$1"
 
-echo $(ls -halt) > ~/Gar_file
-echo "\nHelloGAR\n" >> ~/Gar_file
+mv bin "${PREFIX}"
+mv lib "${PREFIX}"
+mv man "${PREFIX}"

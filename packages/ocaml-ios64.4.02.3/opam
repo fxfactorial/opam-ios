@@ -4,7 +4,6 @@ build:[
   ["./install.sh" "%{prefix}%"]
 ]
 
-
 depends :[
   "ocamlfind" {>= "1.5.4"}
 ]
