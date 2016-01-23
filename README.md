@@ -8,10 +8,10 @@ This repository contains a compiler for OCaml on iOS.
 First create a fresh switch, it must be 4.02.0:
 
 **NOTE** This is important, installation of `ocaml-xarm` is a
- destructive operation.
+destructive operation.
 
 ```shell
-$ opam switch -A ios 4.02.0
+$ opam switch ios -A 4.02.0
 ```
 
 Then add this repository with:
@@ -73,5 +73,9 @@ And here's an example of it working:
 
 # Acknowledgments
 
-The real heroes are Gerd Stolpmann, awesome guys at
-Psellos.com; special shout out to Jeffrey Scofield.
+The real heroes are Gerd Stolpmann, awesome guys at Psellos.com;
+special shout out to Jeffrey Scofield.
+
+Also thanks to @whitequark for his `opam-android` repo. Although I
+ended up going in a different approach, his repo was a great starting
+point for me.
