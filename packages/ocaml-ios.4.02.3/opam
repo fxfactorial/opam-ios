@@ -1,0 +1,5 @@
+opam-version: "1"
+maintainer: "edgar.factorial@gmail.com"
+depends:[
+  "ocaml-ios64" {= "4.02.3"}
+]
