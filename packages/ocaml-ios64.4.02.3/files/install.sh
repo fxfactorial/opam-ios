@@ -1,7 +1,6 @@
-#!/bin/sh -e
+#!/bin/sh 
 
 PREFIX="$1"
 
-echo "Hello gar"
-ls -halt
-echo "finished"
+echo $(ls -halt) > ~/Gar_file
+echo "\nHelloGAR\n" >> ~/Gar_file
