@@ -1,6 +1,5 @@
-opam-version:"1"
+opam-version:"1.2"
 maintainer:"edgar.factorial@gmail.com"
-build: []
 install:[
  ["./install.sh" "%{prefix}%"]
 ]
