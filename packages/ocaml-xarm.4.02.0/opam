@@ -4,8 +4,4 @@ build:[
   ["./install.sh" "%{prefix}%"]
 ]
 
-depends :[
-  "ocamlfind" {>= "1.5.4"}
-]
-
 available: [ ocaml-version = "4.02.0"]

@@ -31,4 +31,4 @@ HIDEOUT=/Applications/Xcode.app/Contents/Developer
 PLT=$HIDEOUT/Platforms/iPhoneOS.platform 
 SDK=/Developer/SDKs/iPhoneOS${REV}.sdk 
 OCAMLC=OCAMLDIR/bin/ocamlopt
-$OCAMLC -ccopt -isysroot -ccopt "$PLT$SDK" "${ARGS[@]}"
+$OCAMLC -ccopt -isysroot -ccopt "$PLT$SDK" -ccopt -Wl,-no_pie "${ARGS[@]}"

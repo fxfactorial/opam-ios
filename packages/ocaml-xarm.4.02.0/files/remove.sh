@@ -2,5 +2,3 @@
 
 PREFIX="$1"
 
-
-echo "finished uninstalling"
