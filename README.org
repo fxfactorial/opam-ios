@@ -79,6 +79,8 @@ And here's an example of it working:
 
 [[./working_server.gif]]
 
+For an example of calling OCaml from Objective-C, see this [[http://hyegar.com/blog/2016/01/23/calling-ocaml-from-objective-c-on-the-iphone/][blog post]]
+
 * Issues
 This won't work with other opam packages just yet, I am still working
 on that. The only thing you'll have at your disposal for now is the

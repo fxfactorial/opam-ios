@@ -73,6 +73,8 @@ And here's an example of it working:
 
 ![img](./working_server.gif)
 
+For an example of calling OCaml from Objective-C, see this [blog post](http://hyegar.com/blog/2016/01/23/calling-ocaml-from-objective-c-on-the-iphone/)
+
 # Issues
 
 This won't work with other opam packages just yet, I am still working
