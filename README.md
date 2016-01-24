@@ -8,7 +8,9 @@ This repository contains a compiler for OCaml on iOS.
 First create a fresh switch, it must be 4.02.0:
 
 **NOTE** This is important, installation of `ocaml-xarm` is a
-destructive operation.
+destructive operation. In this context it means that the later
+installation of `ocaml-xarm` will delete the existing compilers, hence
+we make a switch just for this package.
 
 ```shell
 $ opam switch ios -A 4.02.0
@@ -70,6 +72,12 @@ and iOS 7.1.
 And here's an example of it working:
 
 ![img](./working_server.gif)
+
+# Issues
+
+This won't work with other opam packages just yet, I am still working
+on that. The only thing you'll have at your disposal for now is the
+OCaml standard library, which does include unix.
 
 # Acknowledgments
 
