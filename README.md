@@ -47,9 +47,9 @@ Unix module with no problem on the iPhone.
  6    print_endline "About to listen";
  7    listen sock 5;
  8    let resp = "Thanks for the Test!\n" in
- 9    while true do
-10      let (listen_sock, listen_addr) = accept sock in
-11      let buf = String.create 255 in
+ 9    let buf = String.create 255 in
+10    while true do
+11      let (listen_sock, listen_addr) = accept sock in
 12      (ignore (read listen_sock ~buf ~pos:0 ~len:255));
 13      print_endline buf;
 14      (ignore @@ write listen_sock ~buf:resp ~pos:0 ~len:(String.length resp - 1));

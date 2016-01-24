@@ -53,9 +53,9 @@ let () =
   print_endline "About to listen";
   listen sock 5;
   let resp = "Thanks for the Test!\n" in
+  let buf = String.create 255 in
   while true do
     let (listen_sock, listen_addr) = accept sock in
-    let buf = String.create 255 in
     (ignore (read listen_sock ~buf ~pos:0 ~len:255));
     print_endline buf;
     (ignore @@ write listen_sock ~buf:resp ~pos:0 ~len:(String.length resp - 1));
