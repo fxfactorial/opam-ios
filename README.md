@@ -67,7 +67,7 @@ The -rev 8.3 refers to the iOS SDK. In this example I compiled for
 8.3, note that this is just for paths, it will actually look for a
 path like /Applications/Xcode.app&#x2026; Funny enough, even though this
 was for 8.3, the code will work below that as well, I tested it on 8.3
-and iOS 7.1.
+and iOS 7.1; Xcode6.3.2 will give you the 8.3 SDK.
 
 And here's an example of it working:
 
