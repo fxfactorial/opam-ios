@@ -1,7 +1,6 @@
 opam-version:"1.2"
 maintainer:"edgar.factorial@gmail.com"
-build:[
+install:[
   ["./install.sh" "%{prefix}%"]
 ]
-
 available: [ ocaml-version = "4.02.0" & os = "darwin"]
