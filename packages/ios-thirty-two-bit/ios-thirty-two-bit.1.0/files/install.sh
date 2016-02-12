@@ -10,7 +10,13 @@ git clone -b 4.02.3 https://github.com/ocaml/ocaml ${first_clone}
 cd ${first_clone}
 
 sed -i "" "1s/4.02.3/4.02.3+ios/g" VERSION
-./configure -prefix ${prefix}/release
+
+./configure -prefix ${prefix}/release \
+	    -no-shared-libs -host i386-apple-darwin$(uname -r) \
+	    -cc 'clang -arch i386' -as 'clang -arch i386 -c' \
+	    -aspp 'clang -arch i386 -c' \
+	    -lib -Wl,-no_pie
+
 make world.opt
 make install
 
