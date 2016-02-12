@@ -3,4 +3,4 @@ maintainer:"edgar.factorial@gmail.com"
 install:[
   ["./install.sh" "%{prefix}%"]
 ]
-available: [ ocaml-version = "4.02.0" & os = "darwin"]
+available: [ ocaml-version = "4.02.3" & os = "darwin"]
