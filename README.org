@@ -8,18 +8,25 @@
 
 * opam-ios
 
-This repository contains a compiler for OCaml on iOS.
+This repository contains a 32 bit and 64 bit cross-compiler for OCaml
+on iOS SDK 7.0-9.2, ~armv7~ and ~arm64~ respectively. Do read this
+README, it has instructions on how to install, compile and codesigning
+for jailbroken phones.
 
-* Usage
-First create a fresh switch, it must be 4.02.0:
+*IMPORTANT* 
 
-*NOTE* This is important, installation of ~ocaml-xarm~ is a
-destructive operation. In this context it means that the later
-installation of ~ocaml-xarm~ will delete the existing compilers, hence
-we make a switch just for this package.
+You do not need to have a jailbroken iOS device to run OCaml,
+you can use the compiler to make an object file out of the OCaml code
+and then use OCaml as a C library from your Objective-C programs.
+
+To run OCaml on jailbroken phones, that is to make arbitrary pure OCaml
+executables, you need to use ~codesign~ or ~ldid~ to sign your binary.
+
+* Installation, either 32-bit and 64-bit
+First create a fresh switch, it must be 4.02.3:
 
 #+BEGIN_SRC shell
-$ opam switch ios -A 4.02.0
+$ opam switch ios -A 4.02.3
 #+END_SRC
 
 Then add this repository with:
@@ -28,18 +35,24 @@ Then add this repository with:
 $ opam repository add ios git://github.com/fxfactorial/opam-ios
 #+END_SRC
 
-Now do:
+Now you have a choice, do you want the 32 bit for armv7 or 64-bit
+compiled for arm64 cross-compiler.
 
-*NOTE* This is a destructive install, hence I told you to make a
-separate switch for this install.
+*For 32-bit*
 
 #+BEGIN_SRC shell
-$ opam install ocaml-xarm
+$ opam install ios-thirty-two-bit
+#+END_SRC
+
+*For 64-bit*
+
+#+BEGIN_SRC shell
+$ opam install ios-sixty-four-bit
 #+END_SRC
 
 Now you can compile OCaml that will run on the iPhone!
 
-* Example
+* Example for jailbroken iDevices
 
 Here is a stupid server, mostly useful to show how one can use the
 Unix module with no problem on the iPhone.
@@ -63,19 +76,42 @@ let () =
   done
 #+END_SRC
 
-Compile with:
+Compile with (same for 32-bit, 64-bit):
 
 #+BEGIN_SRC shell
-$ ocamloptrev -rev 8.3 unix.cmxa server.ml -o The_server
+$ ocamlopt -o The_server unix.cmxa server.ml
 #+END_SRC
 
-The -rev 8.3 refers to the iOS SDK. In this example I compiled for
-8.3, note that this is just for paths, it will actually look for a
-path like /Applications/Xcode.app... Funny enough, even though this
-was for 8.3, the code will work below that as well, I tested it on 8.3
-and iOS 7.1; Xcode6.3.2 will give you the 8.3 SDK.
+Now you need to code sign the binary. You can use ~ldid~, available
+via ~brew~ or Apple's native ~codesign~ tool.
 
-And here's an example of it working:
+with ~ldid~:
+
+#+BEGIN_SRC shell
+$ ldid -S your_binary
+#+END_SRC
+
+with ~codesign~:
+
+first need to get your developer hash account:
+
+#+BEGIN_SRC shell
+$ security find-identity -pcodesigning -v
+1) XXXXX "Some Account: Fool bar"
+...
+#+END_SRC
+
+And now use ~XXXXX~ to sign your binary:
+
+#+BEGIN_SRC shell
+$ codesign --deep --sign XXXXX The_server
+#+END_SRC
+
+(You can also try using ~ldid~ on the device directly, its in Cydia).
+
+And here's an example of it working: (The invocation uses ocamloptrev,
+this was an old version created from a previous verion offered by this
+repository but the Unix code is exactly the same)
 
 [[./working_server.gif]]
 
@@ -85,6 +121,7 @@ For an example of calling OCaml from Objective-C, see this [[http://hyegar.com/b
 This won't work with other opam packages just yet, I am still working
 on that. The only thing you'll have at your disposal for now is the
 OCaml standard library, which does include unix.
+
 * Acknowledgments
 The real heroes are Gerd Stolpmann, awesome guys at Psellos.com;
 special shout out to Jeffrey Scofield.
